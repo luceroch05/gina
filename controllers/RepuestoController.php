@@ -2,33 +2,50 @@
 
 namespace Controllers;
 
+require_once '../models/Repuesto.php';
 use Models\Repuesto;
 
 class RepuestoController {
 
-    public function index() {
+    // Crear un nuevo repuesto
+    public function create($data) {
         $repuesto = new Repuesto();
-        $result = $repuesto->read();
-        $repuestos = $result->fetchAll(\PDO::FETCH_ASSOC);
-        include 'views/repuestos.php';
+        $repuesto->descripcion = $data['descripcion'];
+        $repuesto->precio = $data['precio'];
+        $repuesto->stock = $data['stock'];
+        $repuesto->id_categoria = $data['id_categoria'];
+        $repuesto->imagen = $data['imagen'];
+
+        return $repuesto->create();
     }
 
-    public function create() {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $repuesto = new Repuesto();
-            $repuesto->descripcion = $_POST['descripcion'];
-            $repuesto->precio = $_POST['precio'];
-            $repuesto->stock = $_POST['stock'];
-            $repuesto->id_categoria = $_POST['id_categoria'];
-            $repuesto->imagen = $_POST['imagen'];
+    // Obtener todos los repuestos
+    public function read() {
+        $repuesto = new Repuesto();
+        return $repuesto->read()->fetchAll(\PDO::FETCH_ASSOC);
+    }
 
-            if ($repuesto->create()) {
-                echo "Repuesto creado exitosamente.";
-            } else {
-                echo "Error al crear el repuesto.";
-            }
-        }
+    // Obtener un repuesto por ID
+    public function readOne($id) {
+        $repuesto = new Repuesto();
+        return $repuesto->read_one($id);
+    }
 
-        include 'views/repuestos.php';
+    // Actualizar un repuesto
+    public function update($id, $data) {
+        $repuesto = new Repuesto();
+        $repuesto->descripcion = $data['descripcion'];
+        $repuesto->precio = $data['precio'];
+        $repuesto->stock = $data['stock'];
+        $repuesto->id_categoria = $data['id_categoria'];
+        $repuesto->imagen = $data['imagen'];
+
+        return $repuesto->update($id);
+    }
+
+    // Eliminar un repuesto
+    public function delete($id) {
+        $repuesto = new Repuesto();
+        return $repuesto->delete($id);
     }
 }

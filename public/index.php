@@ -9,8 +9,13 @@ use Controllers\PageController;
 use Controllers\AuthController;
 use Controllers\AdminController;
 
-// Capturar la acción
+// Capturar la acción desde la URL (por defecto es 'home')
 $action = $_GET['action'] ?? 'home';
+
+// Si el usuario tiene rol de administrador y no hay una acción específica en la URL
+if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 1 && $action === 'home') {
+    $action = 'admin_dashboard'; // Redirigir al panel admin si no se ha especificado otra acción
+}
 
 // Enrutamiento básico
 switch ($action) {
@@ -30,7 +35,12 @@ switch ($action) {
         break;
 
     case 'admin_dashboard':
-        // Ya no necesitas verificar el rol aquí, se hace en el controlador AuthController
+    case 'clientes':
+    case 'pedidos':
+    case 'repuestos':
+    case 'categorias':
+    case 'promociones':
+        // Todas las acciones relacionadas con el admin dashboard son gestionadas aquí
         $adminController = new AdminController();
         $adminController->dashboard();
         break;
