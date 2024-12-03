@@ -1,0 +1,117 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Raleway', sans-serif;
+}
+
+body {
+    background-color: #f4f7f6; /* Fondo gris suave */
+    color: #333; /* Color de texto */
+    display: flex;
+    height: 100vh;
+}
+
+/* Barra lateral */
+.sidebar {
+    width: 240px;
+    background-color: #1f2a44; /* Gris oscuro */
+    color: white;
+    padding: 20px;
+    position: fixed; /* Fijar la barra lateral */
+    height: 100%; /* Aseguramos que la barra lateral ocupe toda la altura */
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.sidebar-header {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 15px;
+}
+
+.sidebar-nav a {
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-nav a:hover {
+    background-color: #3a4d71; /* Color de hover más claro */
+}
+
+/* Contenido principal */
+.main-content {
+    margin-left: 240px; /* Espacio para la barra lateral */
+    padding: 40px;
+    background-color: #ffffff; /* Fondo blanco */
+    overflow-y: auto; /* Permitir el desplazamiento vertical */
+    height: 100vh; /* Aseguramos que el contenido tenga la altura completa */
+}
+
+/* Cabecera del contenido */
+.main-header {
+    margin-bottom: 30px;
+}
+
+.main-header h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.main-header p {
+    font-size: 18px;
+    color: #7f8c8d;
+    margin-top: 10px;
+}
+
+/* Estilo del contenido (más secciones específicas pueden añadirse) */
+.content {
+    padding-top: 20px;
+}
+
+.content p {
+    font-size: 16px;
+    color: #7f8c8d;
+}
+
+/* Agregar efectos suaves de sombras y bordes */
+.sidebar-nav a {
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.sidebar-nav a:hover {
+    background-color: #3a4d71;
+    border-left: 4px solid #3498db; /* Resaltar con un borde de color azul */
+}
+
+/* Estilos para hacer la interfaz más fluida y moderna */
+.sidebar {
+    transition: width 0.3s ease;
+}
+
+.sidebar:hover {
+    width: 280px; /* Ampliar ligeramente la barra lateral al pasar el mouse */
+}

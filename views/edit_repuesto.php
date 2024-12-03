@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'imagen' => $_POST['imagen']
     ];
     $repuestoController->update($id, $data);
-    header("Location: index.php"); // Redirigir a la lista después de la actualización
+    header("Location: admin_dashboard.php?action=repuestos"); // Redirigir a la lista después de la actualización
     exit;
 }
 ?>

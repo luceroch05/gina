@@ -3,7 +3,7 @@
 namespace Models;
 require_once '../config/database.php';
 use Config\Database;
-
+use PDO;
 class Repuesto {
     private $conn;
     private $table = 'repuesto';
@@ -52,7 +52,7 @@ class Repuesto {
 
     // Obtener un repuesto específico
     public function read_one($id) {
-        $query = "SELECT * FROM {$this->table} WHERE id = :id";
+        $query = "SELECT * FROM {$this->table} WHERE id_repuesto = :id";
         $stmt = $this->conn->prepare($query);
 
         $stmt->bindParam(':id', $id);
@@ -66,7 +66,7 @@ class Repuesto {
         $query = "UPDATE {$this->table} 
                   SET descripcion = :descripcion, precio = :precio, stock = :stock, 
                       id_categoria = :id_categoria, imagen = :imagen 
-                  WHERE id = :id";
+                  WHERE id_repuesto = :id";
 
         $stmt = $this->conn->prepare($query);
 
@@ -87,15 +87,17 @@ class Repuesto {
 
     // Eliminar un repuesto
     public function delete($id) {
-        $query = "DELETE FROM {$this->table} WHERE id = :id";
-
+        $query = "DELETE FROM {$this->table} WHERE id_repuesto = :id_repuesto";
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':id', $id);
-
-        if ($stmt->execute()) {
-            return true;
-        }
-
-        return false;
+        $stmt->bindParam(':id_repuesto', $id, PDO::PARAM_INT);
+    
+        return $stmt->execute(); // Ejecutar la eliminación y devolver el resultado
     }
+    // En el archivo Repuesto.php
+public function getCategories() {
+    $stmt = $this->conn->prepare("SELECT * FROM categoria");
+    $stmt->execute();
+    return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+}
+
 }

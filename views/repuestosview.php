@@ -28,7 +28,7 @@ $repuestos = $repuestoController->read();
         
         <!-- Agregar Nuevo Repuesto -->
         <div class="mb-4 text-right">
-            <a href="create_repuesto.php" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Agregar Nuevo Repuesto</a>
+            <a href="../views/create_repuesto.php" class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600">Agregar Nuevo Repuesto</a>
         </div>
         
         <!-- Tabla de Repuestos -->
@@ -54,12 +54,12 @@ $repuestos = $repuestoController->read();
                             <td class="px-4 py-2"><?= htmlspecialchars($repuesto['id_categoria']); ?></td>
                             <td class="px-4 py-2 text-center">
                                 <!-- Botón de editar -->
-                                <a href="edit_repuesto.php?id=<?= $repuesto['id_repuesto']; ?>" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">Editar</a>
+                                <a href="../views/edit_repuesto.php?id=<?= $repuesto['id_repuesto']; ?>" class="px-4 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">Editar</a>
                                 
-                                <!-- Formulario de eliminación -->
-                                <form action="index.php?action=delete_repuesto" method="POST" class="inline-block">
-                                    <input type="hidden" name="id" value="<?= $repuesto['id_repuesto']; ?>"> <!-- Es importante que el valor esté correcto -->
-                                    <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600" onclick="return confirm('¿Estás seguro de eliminar este repuesto?')">Eliminar</button>
+                                <form action="../controllers/RepuestoController.php" method="POST" class="inline-block">
+                                <input type="hidden" name="id" value="<?= $repuesto['id_repuesto']; ?>">
+                                <input type="hidden" name="action" value="delete"> <!-- Agregar un campo para identificar la acción -->
+                                <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600" onclick="return confirm('¿Estás seguro de eliminar este repuesto?')">Eliminar</button>
                                 </form>
                             </td>
                         </tr>
